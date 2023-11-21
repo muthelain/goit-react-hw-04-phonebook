@@ -7,17 +7,17 @@ import { ContactList } from './ContactList/ContactList';
 import { Filter } from 'components/Filter/Filter';
 
 export function App() {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(() => { return JSON.parse(window.localStorage.getItem('contacts')) ?? ''});
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
     if (contacts.length >= 1) {
-      localStorage.setItem('contacts', JSON.stringify(contacts));
+      window.localStorage.setItem('contacts', JSON.stringify(contacts));
     }
   }, [contacts]);
 
   useEffect(() => {
-    const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
+    const parsedContacts = JSON.parse(window.localStorage.getItem('contacts'));
     if (parsedContacts) {
       setContacts(parsedContacts);
     }
