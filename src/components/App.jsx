@@ -50,17 +50,17 @@ export function App() {
       contact.name.toLowerCase().includes(normalizedFilter) ||
       contact.number.includes(filter)
   );
-    return (
-      <Container>
-        <h1>Phonebook</h1>
-        <ContactForm addContact={this.addContact} />
+  return (
+    <Container>
+      <h1>Phonebook</h1>
+      <ContactForm addContact={addContact} />
 
-        <h2>Contacts</h2>
-        <Filter onFilterChange={this.onFilterChange} />
-        <ContactList
-          deleteContact={this.deleteContact}
-          contacts={filteredContacts}
-        ></ContactList>
-      </Container>
-    );
-  }
+      <h2>Contacts</h2>
+      <Filter onFilterChange={onFilterChange} />
+      <ContactList
+        deleteContact={deleteContact}
+        contacts={filteredContacts}
+      ></ContactList>
+    </Container>
+  );
+}
