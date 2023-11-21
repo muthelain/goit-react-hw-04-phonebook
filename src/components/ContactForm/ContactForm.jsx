@@ -7,18 +7,18 @@ import {
   ContactBtn,
 } from './ContactForm.styled';
 
-export function ContactForm ({addContact}){
-  const [name, setname] = useState('');
+export function ContactForm({ addContact }) {
+  const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  onChange = e => {
-    if (e.currentTarget.name === 'name'){
-      setname(e.currentTarget.value);
+  const onChange = e => {
+    if (e.currentTarget.name === 'name') {
+      setName(e.currentTarget.value);
       return;
     }
-    if (e.currentTarget.number === 'number'){
+    if (e.currentTarget.name === 'number') {
       setNumber(e.currentTarget.value);
-      return
+      return;
     }
   };
   const onSubmit = e => {
