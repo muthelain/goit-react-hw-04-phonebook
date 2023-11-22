@@ -7,8 +7,9 @@ import { ContactList } from './ContactList/ContactList';
 import { Filter } from 'components/Filter/Filter';
 
 export function App() {
-  const [contacts, setContacts] = useState(() => { return JSON.parse(window.localStorage.getItem('contacts')) ?? ''});
+  const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState('');
+
 
   useEffect(() => {
     if (contacts.length >= 1) {
