@@ -7,22 +7,18 @@ import { ContactList } from './ContactList/ContactList';
 import { Filter } from 'components/Filter/Filter';
 
 export function App() {
-  const [contacts, setContacts] = useState([]);
+  // Lazy initialization of state using useState with a function
+  const [contacts, setContacts] = useState(() => {
+    const parsedContacts = JSON.parse(window.localStorage.getItem('contacts'));
+    return parsedContacts || [];
+  });
   const [filter, setFilter] = useState('');
-
 
   useEffect(() => {
     if (contacts.length >= 1) {
       window.localStorage.setItem('contacts', JSON.stringify(contacts));
     }
   }, [contacts]);
-
-  useEffect(() => {
-    const parsedContacts = JSON.parse(window.localStorage.getItem('contacts'));
-    if (parsedContacts) {
-      setContacts(parsedContacts);
-    }
-  }, []);
 
   const addContact = (name, number) => {
     const newContact = {
@@ -36,11 +32,13 @@ export function App() {
     }
     setContacts(prevState => [newContact, ...prevState]);
   };
+
   const deleteContact = contactId => {
     setContacts(prevState =>
       prevState.filter(contact => contact.id !== contactId)
     );
   };
+
   const onFilterChange = e => {
     setFilter(e.currentTarget.value);
   };
@@ -51,6 +49,7 @@ export function App() {
       contact.name.toLowerCase().includes(normalizedFilter) ||
       contact.number.includes(filter)
   );
+
   return (
     <Container>
       <h1>Phonebook</h1>
